@@ -1,8 +1,8 @@
 # Child-skill template · 子技能模板
 
-Step 6 fills this in to produce `<journal-slug>-fit/SKILL.md`. Placeholders are `[...]`. Keep it bilingual where the parent is bilingual. Anchor every writing-style claim to a *real* example — generic advice is the failure mode this template exists to prevent.
+Step 6 fills this in to produce `<journal-slug>-fit/SKILL.md` — a four-step submission companion. Placeholders are `[...]`. Keep it bilingual. **Anchor every claim to a real example** (a real title, a real abstract excerpt, a real guideline line) — generic advice is the failure mode this template exists to prevent.
 
-Step 6 用它生成 `<journal-slug>-fit/SKILL.md`。占位符为 `[...]`。每条写作风格都要锚定**真实**范例——泛泛建议正是这个模板要防的失败模式。
+Step 6 用它生成 `<journal-slug>-fit/SKILL.md`——一个四步投稿伴侣。占位符 `[...]`。**每条都要锚定真实范例**（真实标题、真实摘要片段、真实指南条款）。
 
 ---
 
@@ -10,70 +10,68 @@ Step 6 用它生成 `<journal-slug>-fit/SKILL.md`。占位符为 `[...]`。每�
 ---
 name: [journal-slug]-fit
 description: |
-  Distilled editorial taste of [Journal full name]: a SUBMIT / RESHAPE / REDIRECT fit check
-  + a stage-by-stage reframe playbook. Built from [N] recent papers + official guidance
-  (researched [date]), rival journal: [rival].
-  Use when the user asks "is this a fit for [Journal]", "would [Journal] take this", "投 [Journal] 行不行",
-  "reframe / 改成 [Journal] 风格", "[Journal] desk reject risk", or pastes an abstract/idea aimed at [Journal].
+  Submission companion for [Journal full name], distilled from [N] papers + official guidance (researched [date]); rival: [rival].
+  Four steps: TOPIC (SUBMIT/RESHAPE/REDIRECT fit) → WRITE (the journal's section framework) → POLISH (house style) → SUBMIT (cover letter, title page, declarations).
+  [期刊全名] 的投稿伴侣，蒸馏自 [N] 篇论文 + 官方指南。四步：选题 fit → 写作框架 → 风格润色 → 投稿包（cover letter / title page / 声明）。
+  Use when the user asks "is this a fit for [Journal]", "投 [Journal] 行不行", "按 [Journal] 风格写/改", "帮我写投 [Journal] 的 cover letter / title page", "[Journal] desk reject risk", or pastes an abstract/draft aimed at [Journal].
 ---
 
-# [Journal full name] — Fit Decoder · 选稿与写作蒸馏
+# [Journal full name] — Submission Companion · 投稿伴侣
 
-> [One line capturing this journal's editorial identity, drawn from an editorial or its most-cited work.]
-> First activation only: "Based on published papers + public guidance up to [date]. Reflects published taste, not the editor's private bar. High fit raises the odds — it does not guarantee acceptance."
+> [One line capturing this journal's editorial identity, from an editorial or its most-cited work.]
+> First activation only: "Built from published papers + public guidance up to [date]. Reflects published taste, not the editor's private bar. Fit raises the odds — it never guarantees acceptance. Always check the live Guide for Authors before submitting."
 
 ## How this journal decides · 它怎么做决定（三关）
+- **Stage 1 — editor's first look / 第一关 编辑初筛**: scope = [...]; contribution types it accepts = [...]; desk-reject red flags (each an auto-block) = [≥3, from `rejected.md` or a claims-vs-reality gap].
+- **Stage 2 — peer review / 第二关 同行评审**: method/rigor bar = [...]; how a contribution must be framed = [...]; novelty standard = [...].
+- **Stage 3 — how accepted papers read / 第三关 录用论文的写法**: see the WRITE framework below.
 
-A submission has to clear three stages. This decoder maps your work to each.
-稿件要闯三关。本解码器把你的稿子对到每一关。
+---
 
-### Stage 1 — The editor's first look · 第一关：编辑初筛（这里淘汰最多）
-- **Scope boundary / 范围**: [what's in, what's out — be specific]
-- **Contribution types it accepts / 接受的贡献类型**: [empirical / theory / method / review / design + the mix]
-- **Desk-reject red flags / 直接拒的红旗**: [≥3 concrete killers, each from `rejected.md` or a claims-vs-reality gap]
+## STEP 1 · TOPIC — is it a fit, and what angle? · 选题
+**Verdict protocol**: walk the three stages, score each PASS/WEAK/FAIL with one line of evidence; any Stage-1 red flag → auto-block. Return:
+- **SUBMIT** — clears all three stages.
+- **RESHAPE** — right journal, wrong framing → name the failing stage(s) + the exact fix.
+- **REDIRECT** — won't fit even reshaped → name the better venue (often [rival]).
+**Angle finder**: given a rough idea, propose 2–3 framings that match this journal's topic taste + fill a gap it wants. This journal's gaps right now: [...]. Its saturated zones (avoid): [...].
 
-### Stage 2 — Peer review · 第二关：同行评审
-- **Method/rigor bar / 方法门槛**: [the unstated floor accepted papers share]
-- **How a contribution must be framed / 贡献怎么框**: [what this community needs to see to call it a contribution]
-- **Novelty standard / 新颖性标准**: [incremental ok? replication valued? big-claim expected?]
+## STEP 2 · WRITE — draft on the journal's framework · 写作
+The section-by-section move structure of accepted papers here (from `writing-framework.md`):
+- **Title** — pattern: [...]. Real example: > [real title].
+- **Abstract** — [structured? word cap]; sentence sequence: 1)[fn] 2)[fn] 3)[fn] 4)[fn] 5)[fn]. Real example: > [real abstract excerpt].
+- **Highlights / 要点**: [count, char limit].
+- **Introduction** — moves: [e.g. importance → narrow to tech → gap → "therefore we…" → contribution]. Where the RQs land: [...].
+- **[Framework / Lit review]** — [own section? one subsection per construct?].
+- **Methods** — subsections: [participants/context → design → measures → analysis], expected detail: [...].
+- **Results** — organized by [RQ/hypothesis]; reporting style: [...]; tables/figures: [...].
+- **Discussion** — fixed moves: [restate → interpret vs theory → implications → limitations+future].
+- **Length / structure / references**: [word range; section numbering; reference style].
 
-### Stage 3 — How accepted papers read · 第三关：录用论文怎么写
-- **Abstract recipe / 摘要配方**: [structured? length] — sentence sequence: 1)[fn] 2)[fn] 3)[fn] 4)[fn] 5)[fn]
-  - Real example / 真实范例: > [excerpt from a real abstract in this journal]
-- **Title patterns / 标题套路**: [pattern A], [pattern B] — Real example: > [a real title]
-- **Structure & length / 结构与篇幅**: [section sequence; where limitations live; word range]
-- **Citation habits / 引用习惯**: [density; recency; self-cite-to-journal expectation]
+## STEP 3 · POLISH — toward the house style · 润色
+For a draft or paragraph, do a **before → after** on the author's own text:
+- Flag any sentence that doesn't match the framework/voice above and rewrite it.
+- Enforce the limits ([word cap], [abstract cap]); fix the abstract to the recipe; retitle to a pattern.
+- Run the desk-reject red-flag checklist and fix any hit.
 
-## Fit verdict protocol · 适配裁决协议
+## STEP 4 · SUBMIT — generate the submission kit · 投稿包
+From `guidelines.md`. Generate, ready to verify against the live guide:
+- **Cover letter / 投稿信** — skeleton this journal expects: [e.g. aim + main finding (significance) → fit to scope → novelty/broad implication → originality & no concurrent submission → close]. Exclude: [what must NOT go in it, e.g. declarations/reviewers if entered in-system].
+- **Title page / 题名页** — exactly the required elements: [title; authors; affiliations+country; corresponding author contact; ORCID; funding; acknowledgements; CRediT]. For anonymized review, also list **what to strip from the manuscript**: [author names, acknowledgements, funding, self-citations → third person].
+- **Highlights / structured abstract / graphical abstract** — to spec: [...].
+- **Declarations checklist / 声明清单** — [Competing Interest; CRediT; Data Availability; Ethics/consent; Funding; Generative-AI-use]. Flag any that are mandatory so an omission can't trigger a desk reject.
 
-Given an abstract / idea / manuscript:
-1. **Get facts if needed** — if it hinges on specific methods/data/claims, verify before judging.
-2. **Walk the three stages**, scoring each PASS / WEAK / FAIL with one line of evidence. A Stage-1 red flag is an automatic block.
-3. **Return one verdict**:
-   - **SUBMIT** — clears all three stages; ready or near-ready. Note any quick wins.
-   - **RESHAPE** — right journal, wrong framing. List the failing stage(s) and the exact change that clears each.
-   - **REDIRECT** — won't fit this journal's taste even reshaped. Say why, and name the better-suited venue (often the rival journal or a tier up/down).
-
-## Reframe playbook · 重构剧本
-
-For a RESHAPE verdict, give concrete edits, not advice:
-- **Stage 1 fix**: [e.g. "reposition the theoretical claim as support for the empirical result; this journal desk-rejects theory-first framing"]
-- **Stage 2 fix**: [e.g. "add effect sizes; accepted papers here report them"]
-- **Stage 3 fix**: rewrite the abstract to the recipe above; retitle to a journal pattern. Show the before → after on the user's own text, pointing to the specific sentence that doesn't match and what to make it.
+---
 
 ## vs [rival journal] · 与对手刊的区别
-Submit here rather than [rival] when: [this journal's distinguishing preference].
-If the work leans toward [X], [rival] is the better home.
+Submit here rather than [rival] when: [distinguishing preference]. If the work leans toward [X], [rival] is the better home.
 
 ## Limits · 边界
-- Reflects *published* taste up to [date]; can't see the editor's latest turn unless a recent editorial shows it.
-- Fit ≠ acceptance: reviewers, timing, and luck still decide.
-- Built from public papers + guidance, not internal editorial standards.
-- Sample: [N] papers; rival: [rival].
+- Reflects *published* taste up to [date]; can't see the editor's latest unindexed turn.
+- Fit ≠ acceptance. The submission kit is a draft to verify against the live Guide for Authors.
+- Built from public papers + guidance, not internal standards. Sample: [N] papers; rival: [rival].
 
 ## Evidence · 证据来源
-See `references/evidence/` — `claims.md` (what it says it wants), `published.md` (what it actually publishes), `rejected.md` (what it rejects).
-First-hand: [journal papers, official guidelines]. Second-hand: [analyses, community reports].
+`references/evidence/` — `claims.md` (says) · `published.md` (publishes) · `rejected.md` (rejects) · `guidelines.md` (submission kit) · `writing-framework.md` (section moves) · `rival-[slug].md` (contrast).
 
 ---
 

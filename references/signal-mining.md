@@ -113,6 +113,35 @@ Hold out the calibration papers *before* you finalize the findings, so the test 
 
 ---
 
+## 6b. From open-access full texts → a writing framework · 从全文提炼写作框架
+
+Abstracts tell you the topic; only full text tells you how the journal *writes*. Find 2–3 genuinely open-access papers (OpenAlex `is_oa`, Unpaywall, Europe PMC, repository/preprint copies) and extract the **move structure** — the sequence of rhetorical moves per section, not the content:
+摘要只能看选题；只有全文能看出它**怎么写**。找 2–3 篇真·开放获取论文，提炼每节的**动作结构**（修辞动作的顺序，不是内容）：
+
+- **Introduction** — the funnel: what it opens on (the problem? the technology?), how it narrows, exactly where the gap sentence sits, and whether the research questions live here or later.
+- **Framework / lit review** — its own section, or folded in? one subsection per construct, each ending in a hypothesis?
+- **Methods** — the subsection order and the level of detail expected (e.g. one block per measure with reliability).
+- **Results** — organized by RQ or by hypothesis; how statistics are reported inline; table vs figure roles.
+- **Discussion** — its fixed moves (restate → interpret vs prior work → implications → limitations + future).
+
+Capture two real fork patterns honestly if the journal allows both (e.g. separate Conclusion vs merged). Turn the result into a **fill-in skeleton** the author can follow, anchored to ≥1 real paper. If no OA full text exists, say so and mark the framework "inferred from abstracts".
+
+---
+
+## 6c. From author guidelines → a submission kit · 从作者指南提炼投稿包
+
+The Guide for Authors is a checklist in disguise. Convert it into ready-to-fill templates, not prose:
+作者指南本质是一张藏起来的清单。把它变成可直接填的模板，而不是一段说明：
+
+- **Cover letter** → a skeleton with the exact beats this journal expects (significance, fit to scope, novelty, originality/no concurrent submission), and an explicit list of what must NOT go in it.
+- **Title page** → the exact required elements as a checklist; for anonymized review, also the list of what must be **stripped** from the manuscript (names, acknowledgements, funding, self-citations → third person).
+- **Mandatory declarations** → every required statement (competing interest, CRediT, data availability, ethics/consent, funding, generative-AI-use). Flag each as mandatory so an omission can't trigger a desk reject.
+- **Format gates** → word cap, abstract type + cap, highlights spec, reference style, section numbering. These are the cheapest desk rejects to avoid.
+
+Always note: this kit is a **draft to verify against the live guide**, never a replacement for reading it.
+
+---
+
 ## 7. Self-check before shipping · 交付前自检
 
 - [ ] Every editor-screen finding passes both the rival-journal test and the prediction test.

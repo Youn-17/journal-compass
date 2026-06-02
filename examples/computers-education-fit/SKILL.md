@@ -1,87 +1,101 @@
 ---
 name: computers-education-fit
 description: |
-  Distilled editorial taste of the journal *Computers & Education* (Elsevier, ISSN 0360-1315): its TOPIC TASTE (选题口味) and WRITING STYLE (写作风格), learned from ~250 recent + 60 top-cited papers plus official guidance (researched 2026-06-01). Rival journal: BJET.
-  Computers & Education（Elsevier 教育技术旗舰刊）的选稿口味与写作风格蒸馏。
-  Use this to judge whether a topic / abstract / idea fits C&E (verdict: SUBMIT / RESHAPE / REDIRECT) and to rewrite a draft into C&E's house style.
-  用来判断某选题/摘要/idea 适不适合投 C&E，并把草稿改写成 C&E 风格。
-  Triggers: "is this a fit for Computers & Education", "投 Computers & Education 行不行", "这篇适合投 C&E 吗", "按 C&E 风格改", "Computers & Education desk reject risk", or pasting an abstract/idea aimed at C&E.
+  Submission companion for *Computers & Education* (Elsevier, ISSN 0360-1315), distilled from ~310 papers + the official Guide for Authors + 3 open-access full texts (researched 2026-06-02). Rival: BJET.
+  Computers & Education（Elsevier 教育技术旗舰刊）的投稿伴侣。
+  Four steps: TOPIC (SUBMIT/RESHAPE/REDIRECT fit) → WRITE (C&E's section framework) → POLISH (house style) → SUBMIT (cover letter, title page, declarations).
+  四步：选题 fit → 按 C&E 框架写 → 润色成 C&E 风格 → 生成投稿包（cover letter / title page / 声明清单）。
+  Triggers: "is this a fit for Computers & Education", "投 C&E 行不行", "这篇适合投 C&E 吗", "按 C&E 风格写/改", "帮我写投 C&E 的 cover letter / title page", "C&E desk reject risk".
 ---
 
-# Computers & Education — Fit Decoder · 选稿与写作蒸馏
+# Computers & Education — Submission Companion · 投稿伴侣
 
 > C&E publishes evidence that *a technology changed learning or teaching in a way that matters beyond one classroom* — not technology, and not opinion about technology.
 > C&E 登的是"某项技术以一种超越单个课堂的方式改变了学与教"的**证据**——不是技术本身，也不是对技术的看法。
-> First activation only / 首次激活说明一次: Based on published papers + public guidance up to 2026-06-01. Reflects published taste, not the editor's private bar. High fit raises the odds — it does not guarantee acceptance. 录用率官方未公布；fit 高只提高概率，不保证录用。
+> First activation only: Built from published papers + the Guide for Authors up to 2026-06-02. Reflects published taste, not the editor's private bar. Fit raises the odds — never guarantees acceptance. The submission kit is a draft to verify against the live guide. 投稿包是草稿，投稿前务必核对最新作者指南。
 
 ## How C&E decides · 它怎么做决定（三关）
-
-A submission has to clear three stages. This decoder maps your work to each.
-稿件要闯三关。本解码器把你的稿子对到每一关。
-
-### Stage 1 — The editor's first look · 第一关：编辑初筛（这里淘汰最多）
-- **Scope boundary / 范围**: technology + a **learning/teaching outcome**, with relevance to the **wider education community**. "Computers as a delivery platform only is insufficient." 技术 + 学习/教学结果 + 对广义教育界有意义。
-- **Contribution types accepted / 接受的贡献类型**: empirical research papers (~90%) and systematic reviews / meta-analyses with an analysis framework + PRISMA (~7–10%). Pure theory, pure methods, system/design, and position papers are **not** flagship material here.
-- **Desk-reject red flags / 直接拒的红旗**（命中即一票否决）:
-  1. **No measured learning/teaching outcome** — a tool is described or deployed but its educational effect isn't evidenced. 无学习/教学结果。
-  2. **The contribution is the AI/technology, education is decoration** → routed to the sister journal *Computers & Education: Artificial Intelligence*, not the flagship. 技术当主贡献 → 改投 C&E:AI。
-  3. **Small-scale, single-course/single-institution evaluation** with no broader relevance drawn out. 单课程/单机构小评估。
-  4. **Acceptance/satisfaction-only** (TAM/UTAUT intention-to-use, "students liked it") with no validated learning measure. 满意度/接受度问卷、无学习产出。
-  5. **Implementation-architecture-heavy body** (internals belong in URLs, not the paper). 架构堆砌。
-  6. **Review/meta-analysis without clear RQs, an analysis framework, and PRISMA.** 综述无框架/PRISMA。
-  7. **Format non-compliance** (>8,000 words excl. refs, abstract >250 words, missing 3–5 Highlights, not APA 7th, not double-anonymized) → "returned without review." 格式不合规直接退回。
-
-### Stage 2 — Peer review · 第二关：同行评审
-- **Method/rigor bar / 方法门槛**: empirical evidence of educational impact; quantitative or mixed-methods dominate (quant ~67–69%, mixed ~14–22%, qual ~4–8%). Reviewers expect valid measures, adequate samples, and reported effects — not just significance.
-- **How a contribution must be framed / 贡献怎么框**: connect the technology to a **named learning/teaching construct** (e.g. agency, self-regulation, problem-solving, achievement) AND argue why it matters **beyond the specific setting**. Theory is used to **explain the mechanism**, not offered as a standalone contribution.
-- **Novelty standard / 新颖性**: move past "does tool X help?" to **mechanism, process, boundary conditions, over-reliance, or equity**. Generic "ChatGPT improves X" experiments and acceptance surveys are saturated — reviewers have seen hundreds.
-
-### Stage 3 — How accepted papers read · 第三关：录用论文怎么写（写作风格）
-- **Abstract recipe / 摘要配方**: ~250 words, unstructured prose, functional sequence —
-  1) the educational problem/context, 2) the gap or unresolved tension, 3) what the study did (design + participants), 4) method in one line, 5) key results with direction/magnitude, 6) **implications for learning and teaching**.
-- **Highlights / 要点**: 3–5 bullets, ≤85 characters each.
-- **Title patterns / 标题套路**: name the construct + signal the empirical move. Real C&E examples:
-  - > "The impact of generative AI assistance on student agency" (construct-named, effect-framed)
-  - > "ChatGPT improves creative problem-solving performance in university students: An experimental study" (outcome + explicit design tell)
-  - > "Beyond ChatGPT: A conceptual framework and systematic review of speech-recognition chatbots for language learning" (the scarce review+framework lane)
-- **Structure & length / 结构与篇幅**: IMRaD with an explicit theoretical-framework section; ≤8,000 words; APA 7th; double-anonymized.
-- **Citation habits / 引用习惯**: education + ed-tech literature, recent-weighted; engage C&E's own ongoing conversations where genuine (it signals scope fit).
-
-## Fit verdict protocol · 适配裁决协议
-
-Given an abstract / idea / manuscript:
-1. **Get facts if needed** — if it hinges on a specific method/dataset/claim, verify before judging.
-2. **Walk the three stages**, scoring each PASS / WEAK / FAIL with one line of evidence. Any Stage-1 red flag is an automatic block.
-3. **Return one verdict**:
-   - **SUBMIT** — clears all three stages; an empirical (or framework-driven review) study showing a technology's effect on a learning/teaching construct with broad relevance.
-   - **RESHAPE** — right journal, wrong framing. Name the failing stage(s) and the exact fix.
-   - **REDIRECT** — won't fit C&E's taste even reshaped; name the better home (see "Where else it might belong").
-
-## Reframe playbook · 重构剧本（给 RESHAPE 用，要具体）
-
-- **Stage-1 fixes**
-  - Tool-described-but-not-evaluated → add/foreground a **measured learning outcome**; lead the abstract with the educational effect, not the system.
-  - Single-classroom study → explicitly generalize: why does this matter for the **wider education community**? Add cross-context discussion or reframe the RQ.
-  - AI-method-led → if the real novelty is the model/prompt, **redirect to C&E:AI**; if there's a genuine learning effect, rewrite so the learning construct is the contribution and the AI is the intervention.
-- **Stage-2 fixes**: add effect sizes / validated instruments; reframe theory from "our contribution" to "the mechanism explaining the effect"; push the claim from "X helps" to "*how/when/for whom* X helps."
-- **Stage-3 fixes**: rewrite the abstract to the 6-move recipe; retitle to name the construct; cut implementation detail to URLs; trim to ≤8,000 words; add 3–5 Highlights. Show the author the **before → after** on their own sentence, pointing to what doesn't match and what to make it.
-
-## Where else it might belong · 该改投哪里（含对手刊与姊妹刊）
-- **vs BJET (rival)** — submit to C&E when the paper is an **empirical study evidencing a learning/teaching effect with broad relevance**, or a framework-driven systematic review. Send to **BJET** instead if it's **pure theory, a methodological development, a single-setting or "failed initiative" report, a satisfaction study, or a short provocation** — BJET explicitly invites these (and asks for practice-facing Practitioner Notes); C&E does not.
-- **vs C&E: Artificial Intelligence** — if the named contribution is the AI system, technique, prompt, or a position on AI, it belongs in C&E:AI, not the flagship.
-- **vs C&E: X Reality** — VR/AR/MR/metaverse with a hardware/immersive-tech focus goes there.
-
-## Limits · 边界
-- Reflects *published* taste up to 2026-06-01; can't see the editors' latest unindexed turn.
-- Fit ≠ acceptance: reviewers, timing, and luck still decide.
-- **Acceptance rate is not officially published** — ignore any "~8–12%" figure circulating online (unverified). Timeline (journal-level, medium confidence): ~7 days to first decision, ~190 days to acceptance.
-- The quant-vs-qual mix is estimated from a corpus sample, not a full census.
-- Built from public papers + guidance, not internal editorial standards.
-- Sample: ~250 recent + 60 top-cited papers (OpenAlex) + Elsevier official scope/guide; rival: BJET.
-
-## Evidence · 证据来源
-See `references/evidence/` — `claims.md` (what it says it wants: aims & scope, guide for authors), `published.md` (what it actually publishes: OpenAlex corpus analysis), `rejected.md` (what it rejects: desk-reject + reviewer criteria), `rival-bjet.md` (how it differs from BJET).
+- **Stage 1 · editor's first look / 编辑初筛（淘汰最多）** — scope = technology + a **learning/teaching outcome** + relevance **beyond one classroom**; accepts ~90% empirical + ~7–10% framework-driven systematic reviews; pure theory/methods/system/position papers don't belong here.
+- **Stage 2 · peer review / 同行评审** — evidence of educational impact; quant/mixed dominate; valid measures, adequate samples, reported effect sizes.
+- **Stage 3 · how accepted papers read / 录用论文的写法** — see STEP 2 below.
 
 ---
 
-> Generated by journal-decoder · researched 2026-06-01 · sample ~310 papers · https://github.com/Youn-17/journal-decoder
+## STEP 1 · TOPIC — is it a fit, and what angle? · 选题
+
+**Verdict** (walk the three stages; any Stage-1 red flag = auto-block):
+- ✅ **SUBMIT** — empirical study (or framework-driven review) showing a technology's effect on a **named learning/teaching construct**, with relevance beyond the setting.
+- ♻️ **RESHAPE** — right journal, wrong framing → see STEP 3.
+- ➡️ **REDIRECT** — name the better home (often BJET or C&E:AI; see "Where else it might belong").
+
+**Desk-reject red flags (一票否决):** no measured learning outcome · the AI/tech is the contribution (→ C&E:AI) · single-course/single-institution with no broader relevance · TAM/UTAUT acceptance or satisfaction-only · architecture-heavy body · review without RQs/framework/PRISMA · format non-compliance.
+
+**Angle finder / 选题角度:**
+- **Gaps C&E wants (go here):** GenAI moving from "does it help?" to **mechanism / cognitive process / over-reliance / equity**; longitudinal designs; rigorous framework-driven reviews (only ~7–10%, editors want more).
+- **Saturated (avoid / differentiate hard):** generic "ChatGPT improves X" experiments; TAM/UTAUT acceptance surveys.
+- **Reframe move:** tie your technology to a named construct (agency, self-regulation, problem-solving, achievement) and argue relevance for the *wider education community*.
+
+## STEP 2 · WRITE — draft on C&E's framework · 写作
+*(Section moves reverse-engineered from open-access C&E full texts — see `writing-framework.md`.)*
+
+- **Title** — name the construct + signal the empirical move. Real examples:
+  > "The impact of generative AI assistance on student agency" · "ChatGPT improves creative problem-solving performance in university students: An experimental study" · "Beyond ChatGPT: A conceptual framework and systematic review of … for language learning"
+- **Abstract** — unstructured, **≤250 words**, 6 moves: 1) educational problem/context → 2) the gap → 3) what the study did (design + participants) → 4) method in one line → 5) key results with direction/magnitude → 6) **implications for learning & teaching**.
+- **Highlights** — 3–5 bullets, **≤85 characters each** (separate file).
+- **Introduction** (funnel, RQs do NOT go here) — open on the *educational* problem's importance → narrow to the technology via a brief literature sweep → one-sentence gap → "**Therefore, this study aimed to…**" → contribution + roadmap.
+- **Framework / literature review** — one subsection per construct, each ending in the hypothesis it justifies, grounded in a **named learning theory**; RQs/hypotheses land in a closing "the current study" block pointing to **Fig. 1 (hypothesized model)**.
+- **Methods** — Participants/context → Design & procedure (step-by-step) → Measures (one block per scale: source + example item + Cronbach's α) → Data analysis (named software + technique + fit indices).
+- **Results** — organized by RQ/hypothesis; descriptives + reliability first, then inferential tests reported **inline** (e.g. `t(1159)=23.74, p<.001`; `b=0.18, SE=0.02, 95% CI [0.14, 0.23]`); **Fig. 2 = fitted model**.
+- **Discussion** (6 fixed moves) — restate aim/findings → interpret each anchored to theory → position vs prior work ("In line with…") → **convert every finding into teaching/learning implications** → state the single biggest contribution / broad relevance → limitations grouped by type, each paired with a future direction.
+- **Length / format** — ≤8,000 words (excl. refs); numbered sections (1, 1.1…); APA 7th; American or British English (not mixed).
+
+## STEP 3 · POLISH — toward C&E's house style · 润色
+Do a **before → after** on the author's own text:
+- Flag any dependent variable that isn't an *educational* outcome; reframe it as one.
+- Move implementation/architecture detail to URLs; lead with the learning effect, not the system.
+- Fix the abstract to the 6-move recipe; retitle to a construct-named pattern; trim to ≤8,000 / ≤250 words; add 3–5 Highlights.
+- Run the desk-reject checklist (STEP 1) and fix every hit.
+
+## STEP 4 · SUBMIT — generate the submission kit · 投稿包
+*(All from the Guide for Authors — see `guidelines.md`. C&E is **double-anonymized**, so identity lives on a separate title page.)*
+
+**A. Cover letter** (recommended; ≤1 page):
+```
+Dear Editor,
+[1] Aim + main finding (significance), no fluff.
+[2] Fit to C&E's scope — pedagogical use of technology, relevant to the wider education community.
+[3] Why it's novel + its implication for learning/teaching.
+[4] Original, not published before (preprint excepted), not under consideration elsewhere.
+[5] Mention if invited (e.g. special issue).
+Sincerely, [corresponding author, affiliation, contact]
+```
+> Do **NOT** put funding, author declarations, or suggested/opposed reviewers in the cover letter — those go in the submission system.
+
+**B. Title page** (separate file — checklist):
+`☐ Title  ☐ all author names (order = system)  ☐ affiliations + country  ☐ corresponding author full postal address + email  ☐ present/permanent-address footnote if moved  ☐ acknowledgements (title page ONLY)  ☐ competing-interest statement here only if no separate declaration file`. ORCID → supply in the submission system, not on the title page.
+
+**C. Anonymize the manuscript** (strip-list): remove author names/affiliations, acknowledgements, funding; render self-citations in third person as `[Anonymous, 2007]` (and `[Anonymous 2007] Details omitted for double-anonymized reviewing.` in the list); scrub figure identifiers, file names, and document metadata.
+
+**D. Declarations checklist** (mandatory unless noted): `☐ Declaration of Competing Interest (declarations tool; "nothing to declare" if none)  ☐ CRediT author statement (14 roles)  ☐ Data Availability (Option C: deposit + cite + link, or justify)  ☐ Funding (state even if none)  ☐ Ethics/informed consent (+ SGBA where relevant)  ☐ Generative-AI-use declaration — only if used, as a section *before* the references`.
+
+**E. Formats:** abstract ≤250 words unstructured; 1–7 keywords; Highlights file ("highlights" in name); optional graphical abstract 531×1328 px (TIFF/EPS/PDF/Office; no GenAI); tables as editable text; figures as separate files (≥300 dpi photos, ≥1000 dpi line art); Word single-column (no PDF source).
+
+---
+
+## Where else it might belong · 该改投哪里
+- **vs BJET (rival)** — C&E for an **empirical learning-effect study with broad relevance** or a framework-driven review; **BJET** for pure theory, methodological developments, single-setting / "failed initiative" reports, satisfaction studies, or short provocations (BJET invites these + wants practice-facing Practitioner Notes; C&E doesn't).
+- **vs C&E: Artificial Intelligence** — if the named contribution is the AI system/technique/prompt or a position on AI.
+- **vs C&E: X Reality** — VR/AR/MR/metaverse with a hardware/immersive focus.
+
+## Limits · 边界
+- Reflects *published* taste up to 2026-06-02; can't see the editors' latest unindexed turn.
+- Fit ≠ acceptance: reviewers, timing, luck still decide. The submission kit is a draft — verify against the live Guide for Authors.
+- **Acceptance rate is not officially published** — ignore any "~8–12%" figure online (unverified). Timeline (journal-level, medium confidence): ~7 days to first decision, ~190 days to acceptance.
+- Sample: ~250 recent + 60 top-cited papers (OpenAlex) + Guide for Authors + 3 open-access full texts; rival: BJET.
+
+## Evidence · 证据来源
+`references/evidence/` — `claims.md` (says) · `published.md` (publishes) · `rejected.md` (rejects) · `guidelines.md` (submission kit) · `writing-framework.md` (section moves, from 3 OA full texts) · `rival-bjet.md` (contrast).
+
+---
+
+> Generated by journal-decoder · researched 2026-06-02 · sample ~310 papers + 3 OA full texts · https://github.com/Youn-17/journal-decoder

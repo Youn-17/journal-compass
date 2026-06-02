@@ -1,181 +1,174 @@
-# Journal Decoder · 期刊解码器
+<div align="center">
 
-> **Distill any academic journal into a reusable Claude skill** — learn its topic taste and house writing style from its own papers, then judge fit and reframe your manuscript to match.
-> **把任何学术期刊蒸馏成一个可复用的 Claude 技能**——从它自己的论文里学出它的选题口味和写作风格，再用来判断选题适配、把稿子改写成该刊风格。
+# 📕 Journal Decoder · 期刊解码器
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) / Claude Agent **skill**. Point it at a journal; it reverse-engineers how that journal selects and writes, and ships a standalone `<journal>-fit` child skill you can reuse forever.
+**Distill any academic journal into a reusable Claude skill — then let it guide you from topic to submission.**
 
-一个 Claude Code / Claude Agent **技能**。把它对准一本期刊，它会逆向工程这本刊"怎么选稿、怎么写"，并产出一个可永久复用的 `<journal>-fit` 子技能。
+[English](README.md) · [中文](README_zh.md)
+
+</div>
+
+> Point Journal Decoder at a journal. It studies that journal's published papers, its author guidelines, its aims & scope — reading open-access full texts when it can — and packages everything into a standalone skill, `<journal>-fit`, that becomes your **submission companion**: it tells you whether your idea fits, drafts your paper on that journal's framework, polishes it into the house style, and writes your **cover letter** and **title page**.
+>
+> 把它对准一本期刊，它会研究这本刊发表的论文、作者指南、aims & scope（能找到开放获取全文就连全文一起读），打包成一个独立技能 `<journal>-fit`，成为你的**投稿伴侣**：判断选题适配、按该刊框架起草论文、润色成该刊风格、并写好你的 **cover letter** 和 **title page**。
+
+A skill for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and the Claude Agent SDK. **Tool-agnostic** — runs on plain web access + PDF reading, no paid APIs required.
+
+---
+
+## How it works · the big picture
 
 ```mermaid
 flowchart TB
-    J["📕 A journal<br/>(+ a rival to compare against)"] --> SAY & DO & BLOCK
-
-    SAY["What it CLAIMS it wants<br/>它声称想要什么"] --> GAP
-    DO["What it ACTUALLY publishes<br/>它实际登什么"] --> GAP
-    BLOCK["What it REJECTS<br/>它拒掉什么"] --> GAP
-    GAP{"the gap between claims<br/>and reality · 声称与实际的落差"} --> FIT["🧬 &lt;journal&gt;-fit skill"]
-
-    M["📝 Your abstract / idea / draft"] --> G1
-    FIT -. becomes .-> G1
-    subgraph STAGES["The three stages a paper must clear · 投稿要闯的三关"]
-      direction LR
-      G1["Stage 1<br/>Editor's first look<br/>编辑初筛"] --> G2["Stage 2<br/>Peer review<br/>同行评审"] --> G3["Stage 3<br/>How accepted papers read<br/>录用论文怎么写"]
+    subgraph DISTILL["🧪 DISTILL THE JOURNAL · one-time"]
+      direction TB
+      J["📕 A journal<br/>+ 1 rival journal"]
+      R1["What it CLAIMS<br/>aims &amp; scope · guidelines"]:::say
+      R2["What it PUBLISHES<br/>papers + open-access full text"]:::pub
+      R3["What it REJECTS<br/>desk-reject signals"]:::rej
+      R4["AUTHOR GUIDELINES<br/>cover letter · title page · declarations"]:::gd
+      P[["📗 Journal Profile<br/>topic taste · direction · writing style<br/>section framework · submission rules"]]:::profile
+      J --> R1
+      J --> R2
+      J --> R3
+      J --> R4
+      R1 --> P
+      R2 --> P
+      R3 --> P
+      R4 --> P
     end
-    G3 --> V{"Verdict · 裁决"}
-    V --> S["✅ SUBMIT<br/>投"]
-    V --> R["♻️ RESHAPE<br/>改框架"]
-    V --> X["➡️ REDIRECT<br/>改投"]
 
-    classDef claim fill:#e8f0fe,stroke:#4285f4,color:#202124;
+    P ==> COMP
+
+    subgraph COMP["🚀 YOUR SUBMISSION COMPANION · reuse forever"]
+      direction LR
+      S1["1 · TOPIC<br/>选题<br/><br/>SUBMIT / RESHAPE /<br/>REDIRECT + a fitting angle"]:::step
+      S2["2 · WRITE<br/>写作<br/><br/>draft on the journal's<br/>section framework"]:::step
+      S3["3 · POLISH<br/>润色<br/><br/>rewrite to house style,<br/>clear red flags"]:::step
+      S4["4 · SUBMIT<br/>投稿<br/><br/>cover letter · title page<br/>highlights · declarations"]:::step
+      S1 --> S2 --> S3 --> S4
+    end
+
+    classDef say fill:#e8f0fe,stroke:#4285f4,color:#202124;
     classDef pub fill:#e6f4ea,stroke:#34a853,color:#202124;
     classDef rej fill:#fce8e6,stroke:#ea4335,color:#202124;
-    classDef stage fill:#fff7e0,stroke:#f9ab00,color:#202124;
-    classDef verdict fill:#f3e8fd,stroke:#a142f4,color:#202124;
-    class SAY claim;
-    class DO pub;
-    class BLOCK rej;
-    class G1,G2,G3 stage;
-    class S,R,X verdict;
+    classDef gd fill:#fef7e0,stroke:#f9ab00,color:#202124;
+    classDef profile fill:#e8eaed,stroke:#5f6368,color:#202124;
+    classDef step fill:#f3e8fd,stroke:#a142f4,color:#202124;
 ```
 
-> **Distill** the journal (left) into a reusable skill, then run your manuscript through the **three stages** (right) for a verdict.
-> 先把期刊**蒸馏**成可复用技能，再让你的稿子闯它的**三关**，得到裁决。
+**Distill once, reuse forever.** Distilling a journal takes one research pass; the resulting `<journal>-fit` skill then helps with every paper you send there.
 
 ---
 
-## What it does · 它做什么
+## What it learns about a journal · the Journal Profile
 
-Give it a journal name (and ideally one rival journal to compare against). It produces a child skill — e.g. `computers-education-fit` — that can:
-
-给它一个期刊名（最好再给一本对手刊做对照），它会产出一个子技能（如 `computers-education-fit`），能：
-
-- **Judge fit / 判断适配** — run a topic, abstract, or idea through the journal's three stages and return a **`SUBMIT` / `RESHAPE` / `REDIRECT`** verdict with reasons.
-- **Reframe your draft / 重构草稿** — stage-by-stage edits to match the journal's scope, contribution type, and writing style (abstract recipe, title patterns, structure).
-
-It is **tool-agnostic**: the distillation runs on plain web access + reading PDFs, so anyone can use it. No paid APIs required.
-
-它**不绑定任何工具**：蒸馏靠普通联网 + 读 PDF 即可，任何人都能用，不需要付费 API。
+| # | Part | What it captures |
+|---|------|------------------|
+| 1 | **Aims & scope** | the official positioning — and what it really means in practice |
+| 2 | **Topic taste & direction** | what it publishes, what's surging, what's saturated, which gaps it wants filled |
+| 3 | **Author guidelines → submission kit** | word/abstract limits, highlights, **cover-letter** expectations, **title-page** elements, mandatory declarations (competing interest, CRediT, data, ethics, AI-use), reference style |
+| 4 | **Writing style & framework** | from published papers *and open-access full texts*: the section-by-section move structure, abstract recipe, title patterns, voice |
+| 5 | **Editorial decision model** | the three stages a paper clears (editor screen → peer review → acceptance shape) and the desk-reject red flags |
 
 ---
 
-## How it works · 工作原理
+## The four-step companion · what you actually do with it
 
-Most "journal writing tips" are true of the whole field — useless as guidance. Journal Decoder keeps only what actually sets one journal apart from its neighbors, using two simple ideas:
+### 1 · TOPIC — *"Should I send this here?"*
+Give it an idea or abstract. It runs your work through the journal's gauntlet and returns a verdict — **SUBMIT**, **RESHAPE** (right journal, wrong framing), or **REDIRECT** (send it elsewhere, and here's where) — then proposes 2–3 angles that match what the journal actually wants.
 
-大多数"期刊写作建议"对整个领域都成立——等于没说。期刊解码器只保留真正能把一本刊和邻刊区分开的东西，靠两个简单想法：
+### 2 · WRITE — *"Draft it the way this journal writes."*
+It hands you the journal's own section-by-section skeleton: how the introduction funnels to the gap, where the research questions land, how Methods is subdivided, how Results are reported, the six moves of a Discussion — plus the abstract recipe and title patterns, each anchored to a real published example.
 
-### Idea 1 · Read three things about the journal — and compare them
-### 想法一 · 读懂一本期刊的三样东西，并互相对照
+### 3 · POLISH — *"Make my draft read like it belongs here."*
+Paste a paragraph or a full draft. It does a **before → after** on your own text, flags every sentence that doesn't match the house style, enforces the word/abstract limits, and clears each desk-reject red flag.
 
-| Read… / 读什么 | From… / 来源 | Tells you… / 看出什么 |
-|---|---|---|
-| **What it claims it wants** / 它声称想要什么 | Aims & Scope, author guidelines | the official pitch (trust least) |
-| **What it actually publishes** / 它实际登什么 | recent papers | the real answer (ground truth) |
-| **What it rejects** / 它拒掉什么 | reviewer criteria, desk-reject signals | the hidden filter — what quietly kills a paper |
-
-The most useful thing you can find is **the gap between what a journal claims and what it actually publishes**: e.g. it *says* it welcomes theory but publishes <2% theory → a theory-only paper is at high risk of being rejected without review. That gap is the insight a generic guide can't give you.
-
-最有价值的，是**"它声称的"和"它实际登的"之间的落差**：比如它*说*欢迎理论，实际理论稿不到 2% → 纯理论稿很可能连送审都到不了。这个落差正是泛泛的指南给不了你的洞察。
-
-### Idea 2 · A paper has to clear three stages
-### 想法二 · 一篇论文要闯三关
-
-A paper isn't accepted in one move — it clears **Stage 1 the editor's first look → Stage 2 peer review → Stage 3 the writing style of accepted papers**. The decoder maps fit to each stage, so you learn *which stage* a paper would fail at, not just *whether*.
-
-论文不是一步被录用，而是要闯过 **第一关 编辑初筛 → 第二关 同行评审 → 第三关 录用论文的写法**。解码器把"合不合适"对应到每一关，让你知道稿子会**在哪一关**挂掉，而不只是"行不行"。
-
-### The one rule: the rival-journal test · 唯一铁律：改投测试
-> A finding is kept **only if knowing it would change which of two similar journals you'd submit to.** Anything two neighboring journals want equally is a field-wide norm — dropped.
-> 一条发现只有"知道它会改变你在两本相似期刊之间该投哪本"时才保留。两本邻刊都同样想要的，就是全领域通用规范，丢掉。
-
-That's why you give it a **rival journal** — it's how the decoder tells this journal's house style apart from the whole field's norms.
-
-所以你要给它一本**对手刊**——这是解码器区分"这本刊的家风"和"全领域规范"的办法。
+### 4 · SUBMIT — *"Get me submission-ready."*
+It generates your **cover letter** (to the journal's expected beats), your **title page** (exactly the required elements, respecting anonymized-review rules), your highlights/structured abstract, and a **declarations checklist** so nothing trips a desk reject.
 
 ---
 
-## Install · 安装
+## A worked example (Computers & Education)
+
+The repo ships a real distillation: [`examples/computers-education-fit/`](examples/computers-education-fit/). Here's the kind of interaction it powers.
+
+**① TOPIC**
+> **You:** Is this a fit for C&E? *"We built a ChatGPT plugin and surveyed 40 students in my class; 85% said it was helpful and easy to use."*
+>
+> **Companion:** **REDIRECT / borderline RESHAPE.** Two Stage-1 red flags fire: it's a **single-class satisfaction/acceptance study** (TAM-style "helpful & easy"), with **no measured learning outcome** and no relevance beyond one classroom. To RESHAPE for C&E: replace the satisfaction survey with a design that measures a learning construct (e.g. self-regulated-learning gains vs a control), and argue why it generalizes. As-is, it fits a technology-acceptance or practitioner venue better than C&E.
+
+**② WRITE** — *"Give me a C&E-style title and abstract skeleton."*
+> **Title pattern:** *name the construct + signal the design* → e.g. "The effect of GPT-based scaffolding on self-regulated learning: A quasi-experimental study."
+> **Abstract (≤250 words, 6 moves):** ① why SRL matters in online learning → ② the gap → ③ what you did (design + N) → ④ method in one line → ⑤ key result with effect size → ⑥ implications for teaching.
+
+**③ POLISH** — before → after on one sentence:
+> **Before:** "Students really liked the tool and found it easy to use."
+> **After:** "Students using the GPT scaffold showed higher self-regulated-learning scores than the control group (d = 0.42), suggesting the scaffold supports metacognitive monitoring." *(C&E rewards a measured learning effect, not satisfaction.)*
+
+**④ SUBMIT** — a cover-letter opener it drafts for you:
+> "Dear Editor, we submit *'The effect of GPT-based scaffolding on self-regulated learning'* for consideration in *Computers & Education*. Across a 12-week quasi-experiment (N = 210), the scaffold improved self-regulated-learning outcomes relative to a matched control — evidence that speaks to the wider education community's question of how generative AI can support, rather than replace, student regulation…"
+> …plus a **title-page checklist** (C&E is double-anonymized → identity on a separate page) and a **declarations checklist** (competing interest, CRediT, data availability, AI-use).
+
+Open [`examples/computers-education-fit/references/evidence/`](examples/computers-education-fit/references/evidence/) to see the sourced research behind every claim above — what C&E *says*, *publishes*, *rejects*, its *guidelines*, its *writing framework* (from 3 open-access full texts), and how it differs from BJET.
+
+---
+
+## The one rule that keeps it sharp · the rival-journal test
+
+Most "journal writing tips" are true of the whole field (use IMRaD, state limitations) — useless as guidance. Journal Decoder keeps a finding **only if it would change which of two similar journals you'd submit to.** That's why you give it **one rival journal** to compare against — it's how the skill separates *this journal's* house style from the whole field's norms. Without a rival, the result degrades into generic advice.
+
+It's also built to be **honest**: it never fabricates acceptance rates or guideline details, never dresses up field-wide norms as special taste, always surfaces the gap between what a journal *claims* and what it *publishes*, and reminds you that fit raises the odds but never guarantees acceptance.
+
+---
+
+## Install
 
 ```bash
-# user-level (available in every project) / 用户级（所有项目可用）
 git clone https://github.com/Youn-17/journal-decoder.git
+
+# user-level (every project) / 用户级
 cp -R journal-decoder ~/.claude/skills/journal-decoder
-# (remove README/LICENSE/examples if you want a lean install)
 
 # or project-level / 或项目级
 mkdir -p .claude/skills && cp -R journal-decoder .claude/skills/journal-decoder
 ```
+Restart Claude Code. The only required files are `SKILL.md` + `references/`. To use a pre-distilled journal, also copy `examples/computers-education-fit` into your skills folder.
 
-Restart Claude Code so it picks up the new skill. The only required file is `SKILL.md` (+ `references/`).
-
-重启 Claude Code 以加载技能。必需文件只有 `SKILL.md`（加 `references/`）。
-
----
-
-## Usage · 用法
-
-Just talk to it. It triggers on phrases like:
+## Usage
 
 ```
-Distill the journal Computers & Education     # 直接蒸馏一本刊
-蒸馏 Journal of the Learning Sciences          # rival journal optional
-I work on GenAI + learning analytics — which journal should I target?   # 模糊需求，先推荐候选
-```
+Distill the journal Computers & Education      # build the companion
+蒸馏 Journal of the Learning Sciences           # rival journal optional
+Where should I submit a study on GenAI + learning analytics?   # vague need → it recommends candidates
 
-Once a journal is distilled, use the child skill:
-
-```
-Is this abstract a fit for Computers & Education?  [paste abstract]
-这篇适合投 Computers & Education 吗：[贴摘要]
-Reframe this draft for Computers & Education's style
+# once distilled:
+Is this abstract a fit for Computers & Education?  [paste]
+Draft a C&E-style introduction for this study
+Write my cover letter and title page for C&E
 ```
 
 ---
 
-## Example output · 示例成果
-
-[`examples/computers-education-fit/`](examples/computers-education-fit/) is a real distillation of **Computers & Education** (Elsevier), built from ~310 recent + top-cited papers and official guidance, with BJET as the rival journal. Open its `SKILL.md` to see the format, and `references/evidence/` for the sourced research behind it — what the journal *claims*, what it *publishes*, what it *rejects*, and how it differs from BJET.
-
-[`examples/computers-education-fit/`](examples/computers-education-fit/) 是对 **Computers & Education** 的一次真实蒸馏（基于约 310 篇近作/高被引 + 官方指南，对照刊 BJET）。打开它的 `SKILL.md` 看格式，`references/evidence/` 是背后有据可查的调研：它*声称*什么、*实际登*什么、*拒*什么，以及与 BJET 的区别。
-
----
-
-## Repo layout · 仓库结构
+## Repo layout
 
 ```
 journal-decoder/
-├── SKILL.md                       # the decoder itself · 解码器主体
+├── SKILL.md                       # the decoder (5-part distillation + 4-step build)
 ├── references/
-│   ├── signal-mining.md           # how to keep the real signal, drop noise · 提炼真信号
-│   └── fit-skill-template.md      # skeleton for each <journal>-fit skill · 子技能骨架
+│   ├── signal-mining.md           # keep real findings, drop noise; full-text → framework; guidelines → kit
+│   └── fit-skill-template.md      # skeleton for each <journal>-fit companion
 └── examples/
-    └── computers-education-fit/   # a real distilled journal · 一个真实蒸馏样例
+    └── computers-education-fit/   # a real, fully-distilled journal
+        ├── SKILL.md
+        └── references/evidence/   # claims · published · rejected · guidelines · writing-framework · rival-bjet
 ```
 
----
+## Contributing
 
-## Honesty by design · 诚实设计
+PRs welcome — especially new distilled journals under `examples/`, and improvements to the methodology. Please keep every distillation grounded in real, sourced evidence (each claim with a URL + confidence tag).
 
-The decoder is built to refuse to fake it:
-- never fabricates acceptance rates, review times, or preferences the evidence doesn't show;
-- never dresses up field-wide norms as a journal's special taste;
-- always surfaces the claims-vs-reality gap instead of parroting the Aims & Scope;
-- states its limits — fit raises the odds, it never guarantees acceptance.
-
-解码器在设计上拒绝"编造"：不伪造录用率/周期、不把通用规范包装成独有口味、永远点出"声称 vs 实际"的落差、明确标注"fit 高只提高概率不保证录用"。
-
----
-
-## Contributing · 贡献
-
-PRs welcome — especially new distilled journals under `examples/`, and improvements to the methodology. Please keep distillations grounded in real, sourced evidence.
-
-欢迎 PR——尤其是 `examples/` 下新增的已蒸馏期刊，以及对方法论的改进。请保证每次蒸馏都基于真实、可溯源的证据。
-
----
-
-## Author & License · 作者与许可证
+## Author & License
 
 Created by **Adrian** ([@Youn-17](https://github.com/Youn-17)). Licensed under [MIT](LICENSE) © 2026 Adrian.
 
