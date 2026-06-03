@@ -1,33 +1,39 @@
 <div align="center">
 
-# 📕 Journal Decoder · 期刊解码器
+# Imprimatur · 付梓
 
-**Distill any academic journal into a reusable Claude skill — then let it guide you from topic to submission.**
+### Learn a journal by heart. Earn its imprimatur.
+
+**Distill any academic journal into a reusable Claude skill — one that knows its taste, writes in its voice, and walks your manuscript from first idea to final submission.**
 
 [English](README.md) · [中文](README_zh.md)
 
+<sub>*imprimatur* — Latin, "let it be printed": the seal that a work is fit to publish.</sub>
+
 </div>
-
-> Point Journal Decoder at a journal. It studies that journal's published papers, its author guidelines, its aims & scope — reading open-access full texts when it can — and packages everything into a standalone skill, `<journal>-fit`, that becomes your **submission companion**: it tells you whether your idea fits, drafts your paper on that journal's framework, polishes it into the house style, and writes your **cover letter** and **title page**.
->
-> 把它对准一本期刊，它会研究这本刊发表的论文、作者指南、aims & scope（能找到开放获取全文就连全文一起读），打包成一个独立技能 `<journal>-fit`，成为你的**投稿伴侣**：判断选题适配、按该刊框架起草论文、润色成该刊风格、并写好你的 **cover letter** 和 **title page**。
-
-A skill for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and the Claude Agent SDK. **Tool-agnostic** — runs on plain web access + PDF reading, no paid APIs required.
 
 ---
 
-## How it works · the big picture
+Every journal has a temperament. It favours certain questions and quietly turns others away; it rewards one way of framing a contribution and desk-rejects another; its accepted papers share a cadence you can feel but rarely name. Authors spend years absorbing this by osmosis — a rejection at a time.
+
+**Imprimatur compresses that apprenticeship into one research pass.** Point it at a journal. It reads what the journal *says* it wants, what it *actually* publishes, what it quietly *rejects*, and its full author guidelines — going into open-access full texts when it can — then packages everything into a standalone skill, `<journal>-fit`, that becomes your companion for that venue: it judges whether your idea belongs, drafts your paper in the journal's own architecture, polishes it into the house voice, and hands you the cover letter and title page to send.
+
+Built for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and the Claude Agent SDK. **No paid APIs, no lock-in** — it runs on ordinary web access and PDF reading, so it works for anyone.
+
+---
+
+## The idea in one picture
 
 ```mermaid
 flowchart TB
-    subgraph DISTILL["🧪 DISTILL THE JOURNAL · one-time"]
+    subgraph DISTILL["🧪 DISTILL THE JOURNAL · once"]
       direction TB
-      J["📕 A journal<br/>+ 1 rival journal"]
+      J["📕 A journal<br/>+ one rival to compare against"]
       R1["What it CLAIMS<br/>aims &amp; scope · guidelines"]:::say
       R2["What it PUBLISHES<br/>papers + open-access full text"]:::pub
       R3["What it REJECTS<br/>desk-reject signals"]:::rej
       R4["AUTHOR GUIDELINES<br/>cover letter · title page · declarations"]:::gd
-      P[["📗 Journal Profile<br/>topic taste · direction · writing style<br/>section framework · submission rules"]]:::profile
+      P[["📗 Journal Profile<br/>taste · direction · voice<br/>section framework · submission rules"]]:::profile
       J --> R1
       J --> R2
       J --> R3
@@ -40,11 +46,11 @@ flowchart TB
 
     P ==> COMP
 
-    subgraph COMP["🚀 YOUR SUBMISSION COMPANION · reuse forever"]
+    subgraph COMP["✒️ YOUR SUBMISSION COMPANION · forever"]
       direction LR
       S1["1 · TOPIC<br/>选题<br/><br/>SUBMIT / RESHAPE /<br/>REDIRECT + a fitting angle"]:::step
-      S2["2 · WRITE<br/>写作<br/><br/>draft on the journal's<br/>section framework"]:::step
-      S3["3 · POLISH<br/>润色<br/><br/>rewrite to house style,<br/>clear red flags"]:::step
+      S2["2 · WRITE<br/>写作<br/><br/>draft on the journal's<br/>own section framework"]:::step
+      S3["3 · POLISH<br/>润色<br/><br/>rewrite into the house voice,<br/>clear every red flag"]:::step
       S4["4 · SUBMIT<br/>投稿<br/><br/>cover letter · title page<br/>highlights · declarations"]:::step
       S1 --> S2 --> S3 --> S4
     end
@@ -57,107 +63,100 @@ flowchart TB
     classDef step fill:#f3e8fd,stroke:#a142f4,color:#202124;
 ```
 
-**Distill once, reuse forever.** Distilling a journal takes one research pass; the resulting `<journal>-fit` skill then helps with every paper you send there.
+**Distil once, reuse forever.** One research pass builds the profile; the `<journal>-fit` skill it leaves behind helps with every paper you ever send there.
 
 ---
 
-## What it learns about a journal · the Journal Profile
+## What it learns about a journal
 
-| # | Part | What it captures |
-|---|------|------------------|
+| | Dimension | What it captures |
+|---|---|---|
 | 1 | **Aims & scope** | the official positioning — and what it really means in practice |
-| 2 | **Topic taste & direction** | what it publishes, what's surging, what's saturated, which gaps it wants filled |
-| 3 | **Author guidelines → submission kit** | word/abstract limits, highlights, **cover-letter** expectations, **title-page** elements, mandatory declarations (competing interest, CRediT, data, ethics, AI-use), reference style |
-| 4 | **Writing style & framework** | from published papers *and open-access full texts*: the section-by-section move structure, abstract recipe, title patterns, voice |
-| 5 | **Editorial decision model** | the three stages a paper clears (editor screen → peer review → acceptance shape) and the desk-reject red flags |
+| 2 | **Topic taste & direction** | what gets published, what's surging, what's saturated, which gaps the editors quietly want filled |
+| 3 | **Author guidelines → submission kit** | word and abstract limits, highlights, the **cover-letter** beats it expects, the exact **title-page** elements, every mandatory declaration (competing interest, CRediT, data, ethics, AI-use), reference style |
+| 4 | **Writing voice & framework** | from published papers *and open-access full texts*: the section-by-section move structure, the abstract recipe, the title patterns, the cadence |
+| 5 | **Editorial decision model** | the three gates a paper clears — editor's desk → peer review → the shape of accepted work — and the red flags that end a submission early |
 
 ---
 
-## The four-step companion · what you actually do with it
+## What you do with it — four steps
 
-### 1 · TOPIC — *"Should I send this here?"*
-Give it an idea or abstract. It runs your work through the journal's gauntlet and returns a verdict — **SUBMIT**, **RESHAPE** (right journal, wrong framing), or **REDIRECT** (send it elsewhere, and here's where) — then proposes 2–3 angles that match what the journal actually wants.
+> **1 · TOPIC — *should this go here?***
+> Hand it an idea or an abstract. It runs your work past the journal's gatekeepers and returns a verdict — **SUBMIT**, **RESHAPE** (right journal, wrong framing), or **REDIRECT** (try elsewhere — and here's where) — then offers two or three angles that match what the journal actually wants.
 
-### 2 · WRITE — *"Draft it the way this journal writes."*
-It hands you the journal's own section-by-section skeleton: how the introduction funnels to the gap, where the research questions land, how Methods is subdivided, how Results are reported, the six moves of a Discussion — plus the abstract recipe and title patterns, each anchored to a real published example.
+> **2 · WRITE — *draft it the way this journal writes.***
+> It gives you the journal's own scaffolding: how the introduction funnels to the gap, where the research questions land, how the methods are sectioned, how results are reported, the fixed moves of a discussion — plus the abstract recipe and title patterns, each anchored to a real published paper.
 
-### 3 · POLISH — *"Make my draft read like it belongs here."*
-Paste a paragraph or a full draft. It does a **before → after** on your own text, flags every sentence that doesn't match the house style, enforces the word/abstract limits, and clears each desk-reject red flag.
+> **3 · POLISH — *make my draft sound like it belongs.***
+> Paste a paragraph or a whole draft. It works on *your* sentences — a clean before → after — flags whatever breaks the house voice, holds you to the word and abstract limits, and clears every desk-reject trap.
 
-### 4 · SUBMIT — *"Get me submission-ready."*
-It generates your **cover letter** (to the journal's expected beats), your **title page** (exactly the required elements, respecting anonymized-review rules), your highlights/structured abstract, and a **declarations checklist** so nothing trips a desk reject.
-
----
-
-## A worked example (Computers & Education)
-
-The repo ships a real distillation: [`examples/computers-education-fit/`](examples/computers-education-fit/). Here's the kind of interaction it powers.
-
-**① TOPIC**
-> **You:** Is this a fit for C&E? *"We built a ChatGPT plugin and surveyed 40 students in my class; 85% said it was helpful and easy to use."*
->
-> **Companion:** **REDIRECT / borderline RESHAPE.** Two Stage-1 red flags fire: it's a **single-class satisfaction/acceptance study** (TAM-style "helpful & easy"), with **no measured learning outcome** and no relevance beyond one classroom. To RESHAPE for C&E: replace the satisfaction survey with a design that measures a learning construct (e.g. self-regulated-learning gains vs a control), and argue why it generalizes. As-is, it fits a technology-acceptance or practitioner venue better than C&E.
-
-**② WRITE** — *"Give me a C&E-style title and abstract skeleton."*
-> **Title pattern:** *name the construct + signal the design* → e.g. "The effect of GPT-based scaffolding on self-regulated learning: A quasi-experimental study."
-> **Abstract (≤250 words, 6 moves):** ① why SRL matters in online learning → ② the gap → ③ what you did (design + N) → ④ method in one line → ⑤ key result with effect size → ⑥ implications for teaching.
-
-**③ POLISH** — before → after on one sentence:
-> **Before:** "Students really liked the tool and found it easy to use."
-> **After:** "Students using the GPT scaffold showed higher self-regulated-learning scores than the control group (d = 0.42), suggesting the scaffold supports metacognitive monitoring." *(C&E rewards a measured learning effect, not satisfaction.)*
-
-**④ SUBMIT** — a cover-letter opener it drafts for you:
-> "Dear Editor, we submit *'The effect of GPT-based scaffolding on self-regulated learning'* for consideration in *Computers & Education*. Across a 12-week quasi-experiment (N = 210), the scaffold improved self-regulated-learning outcomes relative to a matched control — evidence that speaks to the wider education community's question of how generative AI can support, rather than replace, student regulation…"
-> …plus a **title-page checklist** (C&E is double-anonymized → identity on a separate page) and a **declarations checklist** (competing interest, CRediT, data availability, AI-use).
-
-Open [`examples/computers-education-fit/references/evidence/`](examples/computers-education-fit/references/evidence/) to see the sourced research behind every claim above — what C&E *says*, *publishes*, *rejects*, its *guidelines*, its *writing framework* (from 3 open-access full texts), and how it differs from BJET.
+> **4 · SUBMIT — *get me submission-ready.***
+> It drafts your **cover letter** in the beats this journal expects, lays out your **title page** with exactly the required elements (respecting anonymized-review rules), assembles your highlights and structured abstract, and runs a **declarations checklist** so nothing trivial sinks you at the desk.
 
 ---
 
-## The one rule that keeps it sharp · the rival-journal test
+## See it work — *Computers & Education*
 
-Most "journal writing tips" are true of the whole field (use IMRaD, state limitations) — useless as guidance. Journal Decoder keeps a finding **only if it would change which of two similar journals you'd submit to.** That's why you give it **one rival journal** to compare against — it's how the skill separates *this journal's* house style from the whole field's norms. Without a rival, the result degrades into generic advice.
+The repo ships a complete, fully-sourced distillation: [`examples/computers-education-fit/`](examples/computers-education-fit/). A taste of what it powers:
 
-It's also built to be **honest**: it never fabricates acceptance rates or guideline details, never dresses up field-wide norms as special taste, always surfaces the gap between what a journal *claims* and what it *publishes*, and reminds you that fit raises the odds but never guarantees acceptance.
+**TOPIC** — *"Is this a fit? We built a ChatGPT plugin and surveyed 40 students in my class; 85% said it was helpful and easy to use."*
+> **REDIRECT — borderline RESHAPE.** Two desk-reject flags fire: it's a single-class **satisfaction/acceptance** study with **no measured learning outcome** and no reach beyond one classroom. To make it C&E-worthy, swap the satisfaction survey for a design that measures a learning construct (e.g. self-regulation gains against a control) and argue why it generalises. As written, a technology-acceptance venue suits it better.
+
+**WRITE** — a C&E-shaped title and abstract spine:
+> *Title* (name the construct + signal the design): "The effect of GPT-based scaffolding on self-regulated learning: A quasi-experimental study."
+> *Abstract* (≤250 words, six moves): why self-regulation matters online → the gap → what you did (design + N) → method in a line → the key effect with its size → what it means for teaching.
+
+**POLISH** — one sentence, before → after:
+> ~~"Students really liked the tool and found it easy to use."~~ → "Students using the GPT scaffold scored higher on self-regulated learning than the control group (*d* = 0.42), suggesting the scaffold supports metacognitive monitoring." *(C&E rewards a measured learning effect, not satisfaction.)*
+
+**SUBMIT** — the cover letter it opens for you, plus a double-anonymized title-page checklist and a declarations checklist (competing interest · CRediT · data availability · AI-use):
+> "Dear Editor, we submit *'The effect of GPT-based scaffolding on self-regulated learning'* for consideration in *Computers & Education*. Across a 12-week quasi-experiment (N = 210), the scaffold improved self-regulated-learning outcomes over a matched control — evidence that speaks to a question the wider education community is asking: how generative AI can *support*, rather than supplant, student regulation…"
+
+Every line above traces back to sourced evidence in [`examples/computers-education-fit/references/evidence/`](examples/computers-education-fit/references/evidence/) — what C&E *says*, *publishes*, and *rejects*, its *guidelines*, its *writing framework* (reverse-engineered from three open-access full texts), and how it differs from BJET.
+
+---
+
+## Why it stays sharp — and honest
+
+Most "journal writing tips" are true of an entire field (use IMRaD, state your limitations) and therefore useless. Imprimatur keeps a finding **only if it would change which of two similar journals you'd submit to** — the rival-journal test. That's why you give it **one rival** to compare against: it's how house style gets separated from field-wide noise.
+
+And it refuses to bluff. It never invents acceptance rates or guideline details, never dresses a field-wide norm up as a journal's private taste, always surfaces the gap between what a journal *claims* and what it *publishes*, and reminds you of the only honest promise it can make: **fit raises your odds — it never guarantees acceptance.** The submission kit is a draft to verify against the live Guide for Authors, not a substitute for reading it.
 
 ---
 
 ## Install
 
 ```bash
-git clone https://github.com/Youn-17/journal-decoder.git
+git clone https://github.com/Youn-17/imprimatur.git
 
-# user-level (every project) / 用户级
-cp -R journal-decoder ~/.claude/skills/journal-decoder
+# user-level (available in every project)
+cp -R imprimatur ~/.claude/skills/imprimatur
 
-# or project-level / 或项目级
-mkdir -p .claude/skills && cp -R journal-decoder .claude/skills/journal-decoder
+# or project-level
+mkdir -p .claude/skills && cp -R imprimatur .claude/skills/imprimatur
 ```
-Restart Claude Code. The only required files are `SKILL.md` + `references/`. To use a pre-distilled journal, also copy `examples/computers-education-fit` into your skills folder.
+Restart Claude Code. The only required files are `SKILL.md` + `references/`. To use a journal that's already distilled, copy `examples/computers-education-fit` into your skills folder too.
 
-## Usage
+## Use
 
 ```
-Distill the journal Computers & Education      # build the companion
-蒸馏 Journal of the Learning Sciences           # rival journal optional
-Where should I submit a study on GenAI + learning analytics?   # vague need → it recommends candidates
+Distil the journal Computers & Education       — build the companion
+Where should I submit a study on GenAI + learning analytics?   — it recommends candidates
 
 # once distilled:
-Is this abstract a fit for Computers & Education?  [paste]
+Is this abstract a fit for Computers & Education?   [paste]
 Draft a C&E-style introduction for this study
 Write my cover letter and title page for C&E
 ```
 
----
-
 ## Repo layout
 
 ```
-journal-decoder/
-├── SKILL.md                       # the decoder (5-part distillation + 4-step build)
+imprimatur/
+├── SKILL.md                       # the distiller (5-part profile + 7-step build)
 ├── references/
-│   ├── signal-mining.md           # keep real findings, drop noise; full-text → framework; guidelines → kit
-│   └── fit-skill-template.md      # skeleton for each <journal>-fit companion
+│   ├── signal-mining.md           # keep real findings, drop noise; full text → framework; guidelines → kit
+│   └── fit-skill-template.md      # the skeleton each <journal>-fit companion is built on
 └── examples/
     └── computers-education-fit/   # a real, fully-distilled journal
         ├── SKILL.md
@@ -166,10 +165,10 @@ journal-decoder/
 
 ## Contributing
 
-PRs welcome — especially new distilled journals under `examples/`, and improvements to the methodology. Please keep every distillation grounded in real, sourced evidence (each claim with a URL + confidence tag).
+Pull requests are warmly welcomed — especially new distilled journals under `examples/`, and refinements to the method. One rule: keep every distillation grounded in real, sourced evidence (each claim with a URL and a confidence tag).
 
-## Author & License
+## Author & licence
 
-Created by **Adrian** ([@Youn-17](https://github.com/Youn-17)). Licensed under [MIT](LICENSE) © 2026 Adrian.
+Created by **Adrian** ([@Youn-17](https://github.com/Youn-17)) · [MIT](LICENSE) © 2026 Adrian.
 
 > Made with [Claude Code](https://claude.com/claude-code).
